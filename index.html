@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UranusFazry MLBB Portal | Hayabusa Shura</title>
+    <title>UranusFazry Portal | FIQ SKYWAY</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -76,22 +76,33 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.3) saturate(1.5) hue-rotate(10deg);
+            filter: brightness(0.4) saturate(1.2);
             transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
         }
 
-        #bg-video { opacity: 1; z-index: 1; }
-        #bg-image { opacity: 0; z-index: 0; }
+        /* Updated for static image only - Adjusted Position */
+        #bg-image { 
+            opacity: 1; 
+            z-index: 0; 
+            /* Mengatur posisi gambar background agar lebih 'turun' (fokus ke bagian atas gambar) */
+            object-position: center 20%; 
+        }
+
+        /* Mobile Optimization for Background Image */
+        @media (max-width: 768px) {
+            #bg-image {
+                /* Paksa gambar tampil penuh tanpa crop */
+                object-fit: fill !important; 
+                object-position: center center !important;
+            }
+        }
 
         @media (min-width: 1024px) {
-            .bg-media {
-                width: 100vh;
-                height: 100vw;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) rotate(-90deg);
-            }
+            /* Optional: Rotate background on desktop if needed, currently standard */
+            /* .bg-media {
+                width: 100vw;
+                height: 100vh;
+            } */
         }
 
         #particle-canvas {
@@ -363,6 +374,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
             position: relative;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: #000;
         }
 
         .profile:hover {
@@ -643,8 +655,7 @@
         .hidden { display: none; }
 
         /* Light Mode Override */
-        body.light-mode #bg-image { opacity: 1 !important; filter: saturate(1.15); }
-        body.light-mode #bg-video { opacity: 0.35; z-index: 1; }
+        body.light-mode #bg-image { opacity: 1 !important; filter: saturate(1.15) brightness(0.9); }
 
         /* QR Wrapper & Frame */
         #qr-wrapper {
@@ -768,10 +779,8 @@
 
     <!-- Background -->
     <div id="bg-container">
-        <video id="bg-video" class="bg-media" autoplay muted playsinline>
-            <source src="">
-        </video>
-        <img id="bg-image" class="bg-media" src="https://i.imghippo.com/files/eJmg6984JU.jpg" alt="Hayabusa Shura Background" crossorigin="anonymous">
+        <!-- Video Removed -->
+        <img id="bg-image" class="bg-media" src="https://i.imghippo.com/files/DnKF1156sCc.jpg" alt="FIQ SKYWAY Background" crossorigin="anonymous">
     </div>
     <canvas id="particle-canvas"></canvas>
 
@@ -784,8 +793,8 @@
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <!-- Logo -->
                 <div id="logo-container" style="display: flex; align-items: center; cursor: pointer; user-select: none;">
-                    <img src="https://i.imghippo.com/files/EePl9866XxI.png" alt="Hayabusa Shura Logo" class="logo-pulse" style="height: 50px; width: auto; border-radius: 50%;" draggable="false" crossorigin="anonymous">
-                    <span class="font-cinzel gold-text" style="font-weight: 700; font-size: 1.25rem; letter-spacing: 0.05em; margin-left: 1rem;">MLBB HAYABUSA</span>
+                    <img src="https://i.imghippo.com/files/EePl9866XxI.png" alt="Logo" class="logo-pulse" style="height: 50px; width: auto; border-radius: 50%;" draggable="false" crossorigin="anonymous">
+                    <span class="font-cinzel gold-text" style="font-weight: 700; font-size: 1.25rem; letter-spacing: 0.05em; margin-left: 1rem;">FIQ SKYWAY</span>
                 </div>
 
                 <!-- Desktop Nav -->
@@ -864,14 +873,14 @@
     </div>
 
     <!-- Main Content -->
-    <main class="container content-layer" style="padding-top: 120px; padding-bottom: 2rem;">
+    <main class="container content-layer" style="padding-top: 160px; padding-bottom: 2rem;">
         
         <!-- Premium Profile Header -->
         <header class="profile-container">
-            <!-- Profile Image (Focal Point) -->
+            <!-- Profile Image (Focal Point) - Changed from Video to Image -->
             <div class="profile">
-                <video src="https://files.catbox.moe/gs4lq5.mp4" alt="Profile Video" autoplay loop muted playsinline
-                style="object-position: 50% 25%; will-change: transform;"></video>
+                <img src="https://files.catbox.moe/u92o6z.jpg" alt="Profile Image" 
+                style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
             </div>
         </header>
 
@@ -883,7 +892,7 @@
 
     <!-- Footer -->
     <footer class="content-layer" style="text-align: center; color: #fff;">
-        <p class="font-cinzel" style="font-size: 0.875rem; opacity: 0.85;">© 2025 Created by SHURA | All Rights Reserved</p>
+        <p class="font-cinzel" style="font-size: 0.875rem; opacity: 0.85;">© 2025 Created by FIQ SKYWAY | All Rights Reserved</p>
         <p class="gold-text font-cinzel" style="font-size: 0.75rem; margin-top: 0.5rem;">Forged by Uranus Support Technology</p>
     </footer>
 
@@ -1056,40 +1065,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- KONFIGURASI BATAS DATA ---
-            // Ubah angka ini untuk mengatur sensitivitas peringatan.
-            // 2900 = Batas aman QR Code normal.
             const MAX_QR_LENGTH = 2900; 
-
-            // --- VIDEO BACKGROUND LOGIC ---
-            let isVideoFinished = false;
-            const bgVideo = document.getElementById('bg-video');
-            const bgImage = document.getElementById('bg-image');
-
-            if (bgVideo && bgImage) {
-                const handleVideoEnd = () => {
-                    bgVideo.style.opacity = '0';
-                    if (!document.body.classList.contains('light-mode')) {
-                        bgImage.style.opacity = '0.45';
-                    }
-                    isVideoFinished = true;
-                };
-
-                const handleVideoError = (e) => {
-                    console.error("Video background failed:", e);
-                    handleVideoEnd();
-                };
-                
-                bgVideo.addEventListener('ended', handleVideoEnd);
-                bgVideo.addEventListener('error', handleVideoError);
-
-                const playPromise = bgVideo.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.warn("Autoplay blocked:", error);
-                        handleVideoEnd();
-                    });
-                }
-            }
 
             // --- DOM ELEMENTS ---
             const logoContainer = document.getElementById('logo-container');
@@ -1203,9 +1179,7 @@
 
             function setupEventListeners() {
                 logoContainer.addEventListener('click', () => {
-                    if (!isVideoFinished) return;
                     document.body.classList.toggle('light-mode');
-                    if (!document.body.classList.contains('light-mode') && bgVideo.style.opacity === '0') bgImage.style.opacity = '0.45';
                     const mode = document.body.classList.contains('light-mode') ? 'Light Mode' : 'Shura Mode';
                     window.showNotification('Theme Changed', `Mode tampilan diubah ke ${mode}.`, 'success');
                 });
@@ -1274,7 +1248,6 @@
             function resetPortalForm() { portalForm.reset(); }
             function savePortals() { localStorage.setItem('portals', JSON.stringify(portals)); }
             window.showAddLinkModal = function() { document.getElementById('add-portal-modal').classList.remove('hidden'); document.getElementById('add-portal-modal').style.display = 'flex'; resetPortalForm(); if (mobileMenu.classList.contains('open')) closeMobileMenu(); }
-            function updateTime() { const now = new Date(); timeDisplay.textContent = now.toLocaleTimeString('en-GB'); dateDisplay.textContent = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); }
             window.resetAllSettings = function() { localStorage.removeItem('portals'); Object.keys(localStorage).forEach(key => { if (key.startsWith('sl_')) localStorage.removeItem(key); }); location.href = window.location.pathname; }
 
             // --- TOGGLE REVEAL FUNCTIONS ---
@@ -1449,7 +1422,7 @@
                         try {
                             const dataUrl = targetCanvas.toDataURL('image/png');
                             const link = document.createElement('a');
-                            link.download = 'Hayabusa_Shura_Portal_QR.png';
+                            link.download = 'FIQ_SKYWAY_Portal_QR.png';
                             link.href = dataUrl;
                             link.click();
                             window.showNotification('Success', 'Download dimulai!', 'success');
